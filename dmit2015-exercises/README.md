@@ -1,3 +1,4 @@
-DMIT2015 - Enterprise Application Development
+Exercise Project
 =============================================
-This project is used for working on your exercises
+This project contains solutions for exercises.
+This project is also used a template to create a new project.
