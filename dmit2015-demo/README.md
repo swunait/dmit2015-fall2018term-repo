@@ -1,3 +1,3 @@
-DMIT2015 - Enterprise Application Development
+Demonstration Project
 =============================================
-This project contains demonstrations of Java EE 8 technologies
+This project is used for in-class demonstations
