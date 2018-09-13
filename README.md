@@ -8,7 +8,9 @@ To clone this repoistory from your VM:
 2. From the Terminal session, type the following commands to: create the git directory in your home directory, change the current directory to the git directory, and clone this git repository.
 
   mkdir -p ~/git
+  
   cd ~/git
+  
   git clone https://github.com/swunait/dmit2015-fall2018term-repo.git dmit2015-instructor-repository
   
 3. Open Eclipse IDE and import the dmit2015-demo project into your workspace as follows:
