@@ -21,15 +21,23 @@ To clone this repoistory from your VM:
 5. From the Terminal session, type the following commands to: (Change yourAccountName value with your actual github account name)
 
   mkdir -p ~/git/my-dmit2015-repository
-  cp -R dmit2015-instructor-repository/dmit2015-exercises my-dmit2015-repository
-  cd ~/git/my-dmit2015-repository
-  mv dmit2015-exercises my-dmit2015-exercises
-  git init
-  git add my-dmit2015-exercises
-  git commit -m "first commit"
-  git remote add origin https://github.com/yourAccountName/my-dmit2015-repository.git
-  git push -u origin master
   
+  cp -R dmit2015-instructor-repository/dmit2015-exercises my-dmit2015-repository
+  
+  cd ~/git/my-dmit2015-repository
+  
+  mv dmit2015-exercises my-dmit2015-exercises
+  
+  git init
+  
+  git add my-dmit2015-exercises
+  
+  git commit -m "first commit"
+  
+  git remote add origin https://github.com/yourAccountName/my-dmit2015-repository.git
+  
+  git push -u origin master
+    
 6. Open Eclipse IDE and import the my-dmit2015-exercises project into your workspace as follows:
   1) From menu select "File | Import"
   2) Select "General | Existisng Projects into Workspace" then click Next
