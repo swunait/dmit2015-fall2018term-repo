@@ -48,7 +48,11 @@ Commit and Pushing your changes to your own GIT repository
 1. From the Terminal session, type the following commands to: 
 
   cd ~/git/my-dmit2015-exercises
+  
   git add my-dmit2015-exercises
+  
   git commit -m "my commit message"
+  
   git push -u origin master
   
+ 
