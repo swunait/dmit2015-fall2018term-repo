@@ -15,6 +15,8 @@ import javax.mail.URLName;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.jasypt.util.text.StrongTextEncryptor;
+
 import com.sun.mail.pop3.POP3SSLStore;
 
 public class WebMail {
@@ -31,10 +33,10 @@ public class WebMail {
 		Transport currentTransport = null;
 		try {
 			// 4) Set the message's From: address
-			Address fromAddress = new InternetAddress("yourUsername@gmail.com", "Your Name");
+			Address fromAddress = new InternetAddress("swu.nait@gmail.com", "Sam Wu - Gmail Account");
 			currentMessage.setFrom(fromAddress);
 			// 5) Set the message's To: address
-			Address toAddress = new InternetAddress("someone@somedomain.com", "Receipient Name");
+			Address toAddress = new InternetAddress("swu@nait.ca", "Sam Wu - NAIT Account");
 			currentMessage.setRecipient(Message.RecipientType.TO, toAddress);
 			// 6) Set the message's subject
 			currentMessage.setSubject("DMIT2015 - JavaMail API test");
@@ -43,12 +45,15 @@ public class WebMail {
 			// 8) Get a "Transport" from the session
 			currentTransport = currentSesion.getTransport("smtps");
 			// 9) Connect the transport to a named host using a username and password
-			currentTransport.connect("smtp.gmail.com", "myUsername", "myPassword");
+StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+textEncryptor.setPassword("Password2015");
+String plainTextPassword = textEncryptor.decrypt("IPRAQCn8CeUG4Ak0ozp5iwKBJ2evI7Sl");
+currentTransport.connect("smtp.gmail.com", "swu.nait", plainTextPassword);
 			// 10) Send the message to all recipients over the transport
 			currentTransport.sendMessage(currentMessage, currentMessage.getAllRecipients());
 			System.out.println("Send mail message was successful");
 		} catch (UnsupportedEncodingException | MessagingException e) {
-			System.out.println("Send mail meassage was not successful");
+			System.out.println("Send mail message was not successful");
 			e.printStackTrace();
 		} finally {
 			// Transport does not implement AutoCloseable
