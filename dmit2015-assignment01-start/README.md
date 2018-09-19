@@ -1,3 +1,9 @@
+mkdir -p ~/git
+
+cd ~/git
+
+git clone https://github.com/swunait/dmit2015-fall2018term-repo.git dmit2015-instructor-repository
+
 mkdir -p ~/git/my-dmit2015-repository
 
 cd ~/git/dmit2015-instructor-repository
