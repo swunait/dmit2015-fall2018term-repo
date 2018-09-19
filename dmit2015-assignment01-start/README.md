@@ -4,7 +4,7 @@ cd ~/git
 
 git clone https://github.com/swunait/dmit2015-fall2018term-repo.git dmit2015-instructor-repository
 
-mkdir -p ~/git/my-dmit2015-repository
+git clone https://github.com/yourAccountName/my-dmit2015-repository.git
 
 cd ~/git/dmit2015-instructor-repository
 
@@ -18,7 +18,6 @@ cp -R dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourna
 
 cd ~/git
 
-git clone https://github.com/yourAccountName/my-dmit2015-repository.git
 
 git add dmit2015-assignment01-yourname
 
