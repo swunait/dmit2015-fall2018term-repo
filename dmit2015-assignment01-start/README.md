@@ -16,6 +16,8 @@ cd ~/git/my-dmit2015-repository
 
 cp -R dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
 
+git clone https://github.com/yourAccountName/my-dmit2015-repository.git
+
 git add dmit2015-assignment01-yourname
 
 git commit -m "first commit"
