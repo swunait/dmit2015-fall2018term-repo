@@ -20,8 +20,6 @@ git add dmit2015-assignment01-yourname
 
 git commit -m "assed assignment 1 project"
 
-git remote add origin https://github.com/yourAccountName/my-dmit2015-repository.git
-
 git push -u origin master
 
 # Open Eclipse and Import the dmit2015-assignment01-yourname project
