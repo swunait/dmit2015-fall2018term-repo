@@ -18,7 +18,7 @@ cp -R dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourna
 
 git add dmit2015-assignment01-yourname
 
-git commit -m "first commit"
+git commit -m "assed assignment 1 project"
 
 git remote add origin https://github.com/yourAccountName/my-dmit2015-repository.git
 
