@@ -1,3 +1,5 @@
+mkdir -p ~/git/my-dmit2015-repository
+
 cd ~/git/dmit2015-instructor-repository
 
 git pull
