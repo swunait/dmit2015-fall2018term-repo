@@ -14,7 +14,7 @@ cp -R dmit2015-assignment01-start ~/git/my-dmit2015-repository
 
 cd ~/git/my-dmit2015-repository
 
-mv dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
+cp -R dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
 
 git add dmit2015-assignment01-yourname
 
