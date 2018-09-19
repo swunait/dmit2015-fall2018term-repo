@@ -1,25 +1,31 @@
-mkdir -p ~/git
+DMIT2015 Assignment 1 Starter Project
+=====================================
+Prerequisites:
 
-cd ~/git
+* You have clone the instructor repository to `~/git/dmit2015-instructor-repository`
+* You have clone your own private GIT repository to `~/git/my-dmit2015-repository`
 
-git clone https://github.com/swunait/dmit2015-fall2018term-repo.git dmit2015-instructor-repository
+Clone, commit, and push to your own private GIT repositrory
+--------------------------------------------------------------
+To copy this project and commit to your own private GIT repository, open a Terminal session and type in the following commands:
 
-git clone https://github.com/yourAccountName/my-dmit2015-repository.git
+	cd ~/git/dmit2015-instructor-repository
+	git pull
+		
+	cd ~/git/my-dmit2015-repository
+	git pull
+	
+	cp -r ~/git/dmit2015-instructor-repository/dmit2015-assignment01-start ~/git/my-dmit2015-repository/dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
 
-cd ~/git/dmit2015-instructor-repository
+	git add dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
+	
+	git commit -m "copied and renamed assignment 1 starter project"
 
-git pull
+	git push -u origin master
 
-cp -R dmit2015-assignment01-start ~/git/my-dmit2015-repository
 
-cd ~/git/my-dmit2015-repository
-
-cp -R dmit2015-assignment01-start dmit2015-assignment01-yourname (replace yourname with your full name, ex. johnsmith)
-
-git add dmit2015-assignment01-yourname
-
-git commit -m "assed assignment 1 project"
-
-git push -u origin master
-
-# Open Eclipse and Import the dmit2015-assignment01-yourname project
+Import Starter Project in Eclipse
+---------------------------------
+1. Open Eclipse IDE and from the menu select `File | Import`.
+2. The import dialog opens. Select `General | Existing Projects into` then click `Next`.
+3. Change the root directory to `~/git/my-dmit2015-repository/dmit2015-assignment01-yourname` then click `Finish`. 
