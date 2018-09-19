@@ -2,7 +2,7 @@ cd ~/git/dmit2015-instructor-repository
 
 git pull
 
-cp -R dmit2015-instructor-repository/dmit2015-assignment01-start my-dmit2015-repository
+cp -R dmit2015-assignment01-start ~/git/my-dmit2015-repository
 
 cd ~/git/my-dmit2015-repository
 
