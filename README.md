@@ -49,7 +49,7 @@ Commit and Pushing your changes to your own GIT repository
 ----------------------------------------------------------
 1. From the Terminal session, type the following commands to: 
 
-  cd ~/git/my-dmit2015-exercises
+  cd ~/git/y-dmit2015-repository
   
   git add my-dmit2015-exercises
   
