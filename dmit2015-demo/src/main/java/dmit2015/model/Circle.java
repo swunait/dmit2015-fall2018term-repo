@@ -11,12 +11,12 @@ public class Circle {
 	private double radius;
 	
 	/** Construct a circle with a radius 0 */
-	Circle() {
+	public Circle() {
 		radius = 0;
 	}
 	
 	/** Construct a circle with a specified radius */
-	Circle(double newRadius) {
+	public Circle(double newRadius) {
 		radius = newRadius;
 	}
 
