@@ -21,11 +21,12 @@ To copy this project and commit to your own private GIT repository, open a Termi
 	
 	git commit -m "copied and renamed assignment 1 starter project"
 
-	git push -u origin master
+	git push
 
 
 Import Starter Project in Eclipse
 ---------------------------------
-1. Open Eclipse IDE and from the menu select `File | Import`.
-2. The import dialog opens. Select `General | Existing Projects into` then click `Next`.
-3. Change the root directory to `~/git/my-dmit2015-repository/dmit2015-assignment01-yourname` then click `Finish`. 
+1.	Open Eclipse IDE and from the menu select `File | Import`.
+2.	The import dialog opens. Select `General | Existing Projects into` then click `Next`.
+3.	Change the root directory to `~/git/my-dmit2015-repository/dmit2015-assignment01-yourname` then click `Finish`.
+
