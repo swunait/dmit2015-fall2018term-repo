@@ -50,7 +50,7 @@ Committing and Pushing a project using Eclipse IDE
 ---------------------------------------------------
 To commit and push a project to your own private GIT repository using the Eclipse IDE:
 1. 	In Project Explorer view, right-mouse click on your project name and select from the context menu `Team | Commit`
-2.	In the `GIT Staging' view, drag the files you to commit/push `Unstaged Changes` to `Staged Changes`
+2.	In the `GIT Staging` view, drag the files you to commit/push `Unstaged Changes` to `Staged Changes`
 3.	Enter a commit message.
 4.	Click on `Commit and Push...`
 
