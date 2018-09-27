@@ -41,6 +41,15 @@
        			actionListener="#{rectangleController.addRectangle()}">
        		</b:commandButton>
        		
+       		<b:commandButton value="Generate Chart" 
+       			ajax="false"
+				actionListener="#{rectangleController.generateChart()}"
+       		/>
+       		
+       		<p:chart type="bar" model="#{rectangleController.rectangleChartModel}" 
+       			style="height:400px;width=500px;"
+       			/>
+       		
        		<b:dataTable id="rectangleTable"
        			value="#{rectangleController.rectangles}"
        			var="rect">
