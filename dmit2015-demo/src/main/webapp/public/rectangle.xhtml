@@ -64,6 +64,10 @@
        			<b:dataTableColumn label="Diagonal" value="#{rect.diagonal}">
        			</b:dataTableColumn>
 
+       			<b:dataTableColumn label="Currency Value" 
+       				value="#{of:formatCurrency(rect.length,'$')}">
+       			</b:dataTableColumn>
+
        		</b:dataTable>
        		
        		
