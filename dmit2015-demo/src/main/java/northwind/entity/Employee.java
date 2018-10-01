@@ -2,10 +2,6 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name="Employees")
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -81,6 +76,10 @@ public class Employee implements Serializable {
 	@Column(name="TitleOfCourtesy")
 	private String titleOfCourtesy;
 
+	//bi-directional many-to-many association to Territory
+	@ManyToMany(mappedBy="employees")
+	private List<Territory> territories;
+
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="ReportsTo")
@@ -88,12 +87,10 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-one association to Employee
 	@OneToMany(mappedBy="employee")
-	@XmlTransient
 	private List<Employee> employees;
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="employee")
-	@XmlTransient
 	private List<Order> orders;
 
 	public Employee() {
@@ -241,6 +238,14 @@ public class Employee implements Serializable {
 
 	public void setTitleOfCourtesy(String titleOfCourtesy) {
 		this.titleOfCourtesy = titleOfCourtesy;
+	}
+
+	public List<Territory> getTerritories() {
+		return this.territories;
+	}
+
+	public void setTerritories(List<Territory> territories) {
+		this.territories = territories;
 	}
 
 	public Employee getEmployee() {

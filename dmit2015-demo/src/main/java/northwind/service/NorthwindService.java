@@ -48,7 +48,7 @@ public class NorthwindService {
 	
 	public List<Region> findAllRegion() {
 		return entityManager.createQuery(
-			"FROM Region",Region.class
+			"SELECT r FROM Region r ORDER By r.regionDescription",Region.class
 			).getResultList();
 	}
 

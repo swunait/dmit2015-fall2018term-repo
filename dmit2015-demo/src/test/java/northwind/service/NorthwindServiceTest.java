@@ -40,5 +40,28 @@ public class NorthwindServiceTest {
 		assertEquals(4, regions.size());
 	}
 	
+	@Test
+	public void testFindOneRegion() {
+		Region region1 = northwindDB.findOneRegion(1);
+		assertNotNull(region1);
+		assertEquals(1, region1.getRegionID());
+	}
+	
+	@Test
+	public void testCreateUpdateRegion() throws Exception {
+		Region newRegion = new Region();
+		newRegion.setRegionDescription("Sample Description");
+		northwindDB.addRegion(newRegion);
+		Region updateRegion = northwindDB.findOneRegion(newRegion.getRegionID());
+		assertNotNull(updateRegion);
+		assertEquals(updateRegion.getRegionID(), newRegion.getRegionID());
+		assertEquals(updateRegion.getRegionDescription(), newRegion.getRegionDescription());
+		northwindDB.deleteRegion(updateRegion);
+		Region deletedRegion = northwindDB.findOneRegion(newRegion.getRegionID());
+		assertNull(deletedRegion);
+		
+	}
+	
+	
 	
 }

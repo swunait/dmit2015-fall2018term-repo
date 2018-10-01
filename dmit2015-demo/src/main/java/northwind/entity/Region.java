@@ -2,12 +2,6 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-
 import java.util.List;
 
 
@@ -17,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Region.findAll", query="SELECT r FROM Region r")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Region implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="RegionID")
 	private int regionID;
 
-	@NotBlank(message="Region Description field value is required")
-	@Size(min=2, max=50, message="Region Description field value must contain between 2 to 50 characters.")
 	@Column(name="RegionDescription")
 	private String regionDescription;
 
 	//bi-directional many-to-one association to Territory
 	@OneToMany(mappedBy="region")
-	@XmlTransient
 	private List<Territory> territories;
 
 	public Region() {

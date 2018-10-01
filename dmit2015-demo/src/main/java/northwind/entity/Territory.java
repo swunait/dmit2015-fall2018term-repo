@@ -2,7 +2,7 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 /**
@@ -16,12 +16,25 @@ public class Territory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="TerritoryID")
 	private String territoryID;
 
-	@NotBlank(message="Territory Description field value is required")
 	@Column(name="TerritoryDescription")
 	private String territoryDescription;
+
+	//bi-directional many-to-many association to Employee
+	@ManyToMany
+	@JoinTable(
+		name="EmployeeTerritories"
+		, joinColumns={
+			@JoinColumn(name="TerritoryID")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="EmployeeID")
+			}
+		)
+	private List<Employee> employees;
 
 	//bi-directional many-to-one association to Region
 	@ManyToOne
@@ -45,6 +58,14 @@ public class Territory implements Serializable {
 
 	public void setTerritoryDescription(String territoryDescription) {
 		this.territoryDescription = territoryDescription;
+	}
+
+	public List<Employee> getEmployees() {
+		return this.employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 	public Region getRegion() {

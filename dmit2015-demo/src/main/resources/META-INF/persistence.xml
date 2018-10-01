@@ -26,6 +26,17 @@
       <!-- The datasource is deployed as WEB-INF/dmit2015-demo-ds.xml, you
          can find it in the source at src/main/webapp/WEB-INF/dmit2015-demo-ds.xml -->
       <jta-data-source>java:jboss/datasources/MysqlNorthwindDS</jta-data-source>
+      <class>northwind.entity.Category</class>
+      <class>northwind.entity.Customer</class>
+      <class>northwind.entity.Employee</class>
+      <class>northwind.entity.OrderDetail</class>
+      <class>northwind.entity.OrderDetailPK</class>
+      <class>northwind.entity.Order</class>
+      <class>northwind.entity.Product</class>
+      <class>northwind.entity.Region</class>
+      <class>northwind.entity.Shipper</class>
+      <class>northwind.entity.Supplier</class>
+      <class>northwind.entity.Territory</class>
       <properties>
          <!-- Properties for Hibernate -->
 <!--          <property name="hibernate.hbm2ddl.auto" value="validate" /> -->

@@ -2,12 +2,6 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-
 import java.util.List;
 
 
@@ -18,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name="Shippers")
 @NamedQuery(name="Shipper.findAll", query="SELECT s FROM Shipper s")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Shipper implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,8 +20,6 @@ public class Shipper implements Serializable {
 	@Column(name="ShipperID")
 	private int shipperID;
 
-	@NotBlank(message="Company Name field value is required")
-	@Size(min=2, max=40, message="Company Name field value must be 2 to 40 characters.")
 	@Column(name="CompanyName")
 	private String companyName;
 
@@ -37,7 +28,6 @@ public class Shipper implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="shipper")
-	@XmlTransient
 	private List<Order> orders;
 
 	public Shipper() {

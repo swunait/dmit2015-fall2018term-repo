@@ -2,10 +2,6 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-
 import java.math.BigDecimal;
 
 
@@ -16,7 +12,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="`Order Details`")
 @NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,13 +29,12 @@ public class OrderDetail implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne
-	@JoinColumn(name="OrderID", updatable=false, insertable=false)
-	@XmlTransient
+	@JoinColumn(name="OrderID", insertable=false, updatable=false)
 	private Order order;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name="ProductID", updatable=false, insertable=false)
+	@JoinColumn(name="ProductID", insertable=false, updatable=false)
 	private Product product;
 
 	public OrderDetail() {
