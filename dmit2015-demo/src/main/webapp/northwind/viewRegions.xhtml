@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/template-northwind.xhtml">
+
+	<ui:param name="title" value="REGIONS" />
+
+	<ui:define name="maincontent">
+
+		<b:jumbotron> 
+       		<h1>Listing of REGIONS</h1>
+       </b:jumbotron>
+       
+        <h:form >
+            <b:messages id="messages" />
+            
+            <b:commandButton value="Create Region Detail Form" 
+				icon-awesome="link"
+				action="regionDetail?faces-redirect=true">
+			</b:commandButton>
+			
+            <b:dataTable id="regions"
+            	value="#{currentRegionController.retreiveAllRegions()}"
+            	var="currentRegion">
+            	<b:dataTableColumn label="RegionID" value="#{currentRegion.regionID}"></b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="Region Description" value="#{currentRegion.regionDescription}"></b:dataTableColumn>	
+            	
+            	<b:dataTableColumn label="Action">
+					<b:link outcome="regionDetail"  icon-awesome="edit" icon-size="lg">
+						<f:param name="id" value="#{currentRegion.regionID}" />
+						edit
+					</b:link>
+				</b:dataTableColumn>
+            </b:dataTable>
+            
+        </h:form>
+
+	</ui:define>
+
+</ui:composition>
