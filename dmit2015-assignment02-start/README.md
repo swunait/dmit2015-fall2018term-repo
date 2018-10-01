@@ -19,7 +19,7 @@ To copy this project and commit to your own private GIT repository, open a Termi
 
 	git add dmit2015-assignment02-yourname (replace yourname with your full name, ex. johnsmith)
 	
-	git commit -m "copied and renamed assignment 1 starter project"
+	git commit -m "copied and renamed assignment 2 starter project"
 
 	git push
 
