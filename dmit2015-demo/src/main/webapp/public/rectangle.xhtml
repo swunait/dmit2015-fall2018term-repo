@@ -41,6 +41,15 @@
        			actionListener="#{rectangleController.addRectangle()}">
        		</b:commandButton>
        		
+       		<b:commandButton value="Generate Chart" 
+       			ajax="false"
+				actionListener="#{rectangleController.generateChart()}"
+       		/>
+       		
+       		<p:chart type="bar" model="#{rectangleController.rectangleChartModel}" 
+       			style="height:400px;width=500px;"
+       			/>
+       		
        		<b:dataTable id="rectangleTable"
        			value="#{rectangleController.rectangles}"
        			var="rect">
@@ -53,6 +62,10 @@
        			<b:dataTableColumn label="Perimeter" value="#{rect.perimeter}">
        			</b:dataTableColumn>
        			<b:dataTableColumn label="Diagonal" value="#{rect.diagonal}">
+       			</b:dataTableColumn>
+
+       			<b:dataTableColumn label="Currency Value" 
+       				value="#{of:formatCurrency(rect.length,'$')}">
        			</b:dataTableColumn>
 
        		</b:dataTable>

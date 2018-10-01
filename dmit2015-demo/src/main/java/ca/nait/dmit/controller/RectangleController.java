@@ -2,9 +2,13 @@ package ca.nait.dmit.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 import dmit2015.model.Rectangle;
 
@@ -15,6 +19,19 @@ public class RectangleController implements Serializable {
 
 	private Rectangle currentRectangle = new Rectangle();			// +getter
 	private ArrayList<Rectangle> rectangles = new ArrayList<>();	// +getter
+	private BarChartModel rectangleChartModel = new BarChartModel();	// +getter
+	
+	public void generateChart() {
+		rectangleChartModel.clear();
+		ChartSeries rectangleSeries = new ChartSeries();
+		Random currentRandom = new Random();
+		for(int count = 1; count <= 10; count++) {
+			rectangleSeries.set(count, currentRandom.nextInt(100) + 1);
+		}
+		
+		rectangleChartModel.addSeries(rectangleSeries);		
+	}
+	
 	
 	public void addRectangle() {
 		// add the currentRectangle to the rectangles list
@@ -35,5 +52,10 @@ public class RectangleController implements Serializable {
 		return rectangles;
 	}
 
+	public BarChartModel getRectangleChartModel() {
+		return rectangleChartModel;
+	}
+
+	
 	
 }
