@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import northwind.entity.Category;
 import northwind.entity.Region;
+import northwind.entity.Shipper;
 import northwind.entity.Territory;
 
 @Stateless	// Mark this class as stateless EJB.
@@ -15,6 +17,25 @@ public class NorthwindService {
 
 	@Inject
 	private EntityManager entityManager;
+	
+	public List<Shipper> findAllShipper() {
+		return entityManager.createQuery(
+			"SELECT s FROM Shipper s ORDER BY s.companyName",Shipper.class
+			).getResultList();
+	}
+	
+	public List<Category> findAllCategory() {
+		return entityManager.createQuery(
+			"SELECT c FROM Category c ORDER BY c.categoryName", Category.class
+			).getResultList();
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public void addRegion(Region newRegion) {
