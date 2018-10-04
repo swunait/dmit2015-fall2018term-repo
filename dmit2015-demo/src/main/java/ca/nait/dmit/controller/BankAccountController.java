@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
@@ -37,7 +36,7 @@ public class BankAccountController implements Serializable {
 		yAxis.setLabel("Amount");
 	}
 	
-	public void doWithdraw(ActionEvent event) {
+	public void doWithdraw() {
 		try {
 			currentBankAccount.withdraw(amount, description);
 			amount = null;
@@ -48,7 +47,7 @@ public class BankAccountController implements Serializable {
 		}
 	}
 
-	public void doDeposit(ActionEvent event) {
+	public void doDeposit() {
 		currentBankAccount.deposit(amount, description);
 		amount = null;
 		description = null;		

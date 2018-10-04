@@ -53,21 +53,21 @@
 		<b:row>
 			<b:column span="1">
 				<b:commandButton value="Deposit" look="primary"
-					actionListener="#{currentBankAccountController.doDeposit}"
+					actionListener="#{currentBankAccountController.doDeposit()}"
 					ajax="true"
 					update="messages transactions balance amount description barChart">
 				</b:commandButton>
 			</b:column>
 			<b:column span="1">
 				<b:commandButton value="Withdraw" look="success"
-					actionListener="#{currentBankAccountController.doWithdraw}"
+					actionListener="#{currentBankAccountController.doWithdraw()}"
 					ajax="true"
 					update="messages transactions balance amount description barChart">
 				</b:commandButton>
 			</b:column>
 			<b:column span="1">
 				<b:commandButton value="Update Chart" look="info"
-					actionListener="#{currentBankAccountController.populateChart}"
+					actionListener="#{currentBankAccountController.populateChart()}"
 					immediate="true"
 					ajax="false" >
 				</b:commandButton>
