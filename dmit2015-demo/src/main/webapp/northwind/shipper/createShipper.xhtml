@@ -12,29 +12,36 @@
 	xmlns:hf="http://highfaces.org"
 	template="/WEB-INF/templates/template-northwind.xhtml">
 
-	<ui:param name="title" value="Northwind Shippers" />
+	<ui:param name="title" value="Shipper - Create" />
 
 	<ui:define name="maincontent">
 
-		<b:jumbotron>
-			<h1>Northwind Shippers</h1>
-		</b:jumbotron>
+	<b:jumbotron>
+		<h1>New Shipper Details</h1>
+	</b:jumbotron>
+
+	<b:messages id="messages" />
+
+	<b:form>		
+		<b:inputText id="companyName" 
+			label="Company Name"
+			value="#{newShipper.companyName}"
+			placeholder="enter company name">
+		</b:inputText>
+
+		<b:inputText id="phone" 
+			label="Phone"
+			value="#{newShipper.phone}"
+			placeholder="enter phone number">
+		</b:inputText>
 		
-		<b:messages id="messages"></b:messages>
-		<b:form id="shippersForm">
-			<b:dataTable value="#{shipperController.shippers}"
-				var="currentShipper">
-				<b:dataTableColumn label="ShipperID" 
-					value="#{currentShipper.shipperID}">
-				</b:dataTableColumn>
-				<b:dataTableColumn label="CompanyName" 
-					value="#{currentShipper.companyName}">
-				</b:dataTableColumn>
-				<b:dataTableColumn label="Phone" 
-					value="#{currentShipper.phone}">
-				</b:dataTableColumn>
-			</b:dataTable>
-		</b:form>
+		<b:commandButton value="Add Shipper" 
+			icon-awesome="save"
+			look="primary"
+			actionListener="#{shipperCreateController.createNewShipper()}">
+		</b:commandButton>
+			
+	</b:form>
 
 	</ui:define>
 

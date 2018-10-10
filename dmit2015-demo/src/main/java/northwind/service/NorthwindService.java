@@ -18,23 +18,40 @@ public class NorthwindService {
 	@Inject
 	private EntityManager entityManager;
 	
+	public void addShipper(Shipper newShipper) {
+		entityManager.persist(newShipper);
+	}
+	
+	public void updateShipper(Shipper existingShipper) {
+		entityManager.merge( existingShipper );
+	}
+	
+	public void deleteShipper(Shipper existingShipper) throws Exception {
+		existingShipper = entityManager.merge(existingShipper);
+		if (existingShipper.getOrders().size() > 0) {
+			throw new Exception("You are not allowed to delete a shipper with existing orders.");
+		}
+		entityManager.remove( existingShipper );
+	}
+	
+	public Shipper findOneShipper(int shipperId) {
+		return entityManager.find(Shipper.class, shipperId);	
+	}
+	
 	public List<Shipper> findAllShipper() {
 		return entityManager.createQuery(
 			"SELECT s FROM Shipper s ORDER BY s.companyName",Shipper.class
 			).getResultList();
 	}
 	
+	
+	
+	
 	public List<Category> findAllCategory() {
 		return entityManager.createQuery(
 			"SELECT c FROM Category c ORDER BY c.categoryName", Category.class
 			).getResultList();
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
