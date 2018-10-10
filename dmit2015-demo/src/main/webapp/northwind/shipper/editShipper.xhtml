@@ -34,17 +34,17 @@
 		<b:commandButton value="Search" 
 			icon-awesome="search"
 			look="info"
-			ajax="true" update="messages editForm:shipperPanel"
+			ajax="true" update="messages editForm:querySingleResultPanel"
 			actionListener="#{shipperEditController.findShipper()}">
 		</b:commandButton>
 		
-		<p:outputPanel id="shipperPanel">
+		<p:outputPanel id="querySingleResultPanel">
 			<b:panel title="Shipper Details" 
-				rendered="#{existingShipper.shipperID != null ? 'true' : 'false'}"> 
+				rendered="#{existingShipper != null ? 'true' : 'false'}"> 
 				
 				<b:inputText id="shipperId" 
 					label="ShipperID" 
-					readonly="#{existingShipper.shipperID != null ? 'true' : 'false'}"
+					readonly="true"
 					value="#{existingShipper.shipperID}">
 				</b:inputText>
 			
@@ -63,7 +63,8 @@
 				<b:commandButton value="Update" 
 					look="primary"
 					icon-awesome="save"
-					ajax="false"
+					ajax="update" 
+					update="messages editForm:querySingleResultPanel"
 					actionListener="#{shipperEditController.updateShipper()}">
 				</b:commandButton>
 				
@@ -71,7 +72,8 @@
 					look="danger"
 					icon-awesome="trash"
 					onclick="return confirm('Are you sure you want to delete this item?')"
-					update="messages editForm:shipperPanel"
+					update="messages editForm:querySingleResultPanel"
+					immediate="true"
 					action="#{shipperEditController.deleteShipper()}">
 				</b:commandButton>
 				
@@ -79,7 +81,7 @@
 					look="default"
 					icon-awesome="cancel"
 					ajax="false"
-					update="messages editForm:shipperPanel"
+					update="messages editForm:querySingleResultPanel"
 					immediate="true"
 					actionListener="#{shipperEditController.cancel()}">
 				</b:commandButton>
