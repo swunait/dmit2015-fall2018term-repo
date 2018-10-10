@@ -24,19 +24,19 @@ public class ShipperEditController implements Serializable {
 	@Named
 	private Shipper existingShipper;
 	
-	private Integer shipperIdQueryValue;		// +getter +setter
+	private Integer idQueryValue;		// +getter +setter
 	
-	public Integer getShipperIdQueryValue() {
-		return shipperIdQueryValue;
+	public Integer getIdQueryValue() {
+		return idQueryValue;
 	}
 
-	public void setShipperIdQueryValue(Integer shipperIdQueryValue) {
-		this.shipperIdQueryValue = shipperIdQueryValue;
+	public void setIdQueryValue(Integer idQueryValue) {
+		this.idQueryValue = idQueryValue;
 	}
 
 	public void findShipper() {
 		try {
-			existingShipper = currentNorthwindService.findOneShipper(shipperIdQueryValue);
+			existingShipper = currentNorthwindService.findOneShipper(idQueryValue);
 			if (existingShipper != null) {
 				Messages.addGlobalInfo("Query successful");
 				
@@ -62,7 +62,7 @@ public class ShipperEditController implements Serializable {
 		try {
 			currentNorthwindService.deleteShipper(existingShipper);
 			existingShipper = null;
-			shipperIdQueryValue = null;
+			idQueryValue = null;
 			Messages.addGlobalInfo("Delete successful");
 		} catch (Exception e) {
 			Messages.addGlobalError("Delete unsuccessful");			
