@@ -35,7 +35,7 @@ public class ShipperViewAllController implements Serializable {
 		return shippers;
 	}
 	
-	public void onShipperListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Shipper shipper) {
-		retreiveAllShippers();
-	}
+//	public void onShipperListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Shipper shipper) {
+//		retreiveAllShippers();
+//	}
 }
