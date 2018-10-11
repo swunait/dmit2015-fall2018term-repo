@@ -5,6 +5,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import northwind.service.ValidCanadaPhone;
+
 import java.util.List;
 
 
@@ -12,6 +14,7 @@ import java.util.List;
  * The persistent class for the Shippers database table.
  * 
  */
+@ValidCanadaPhone
 @Entity
 @Table(name="Shippers")
 @NamedQuery(name="Shipper.findAll", query="SELECT s FROM Shipper s")
