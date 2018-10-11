@@ -2,6 +2,9 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -19,6 +22,8 @@ public class Region implements Serializable {
 	@Column(name="RegionID")
 	private int regionID;
 
+	@NotBlank(message="Description value is required.")
+	@Size(max=50, message="Description value must be 50 or less characters")
 	@Column(name="RegionDescription")
 	private String regionDescription;
 

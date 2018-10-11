@@ -2,6 +2,9 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 
@@ -20,9 +23,12 @@ public class Shipper implements Serializable {
 	@Column(name="ShipperID")
 	private int shipperID;
 
+	@NotBlank(message="Company Name value is required.")
+	@Size(max=40, message="Company Name value must be 40 characters or less.")
 	@Column(name="CompanyName")
 	private String companyName;
 
+	@Size(max=24, message="PHone value must be 24 characters or less.")
 	@Column(name="Phone")
 	private String phone;
 

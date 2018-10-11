@@ -53,26 +53,32 @@ public class ShipperEditController implements Serializable {
 		}			
 	}
 	
-	public void updateShipper() {
+	public String updateShipper() {
+		String nextPage = null;
 		try {
 			currentNorthwindService.updateShipper(existingShipper);
 			Messages.addGlobalInfo("Update successful");
+			nextPage = "viewShippers?faces-redirect=true";
 		} catch (Exception e) {
 			Messages.addGlobalError("Update unsuccessful");	
 			Messages.addGlobalError("{0}", e.getMessage());	
 		}
+		return nextPage;
 	}
 
-	public void deleteShipper() {
+	public String deleteShipper() {
+		String nextPage = null;
 		try {
 			currentNorthwindService.deleteShipper(existingShipper);
 			existingShipper = null;
 			idQueryValue = null;
 			Messages.addGlobalInfo("Delete successful");
+			nextPage = "viewShippers?faces-redirect=true";
 		} catch (Exception e) {
 			Messages.addGlobalInfo("Delete unsuccessful");
 			Messages.addGlobalError("{0}", e.getMessage());			
 		}
+		return nextPage;
 	}
 	
 	public void cancel() {

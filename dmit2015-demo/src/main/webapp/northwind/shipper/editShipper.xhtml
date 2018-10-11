@@ -17,7 +17,8 @@
 	<ui:define name="maincontent">
 		<f:metadata>
 			<f:viewParam name="id" value="#{shipperEditController.idQueryValue}" />
-			<f:event type="preRenderView" listener="#{shipperEditController.findByQueryParameterId()}" />
+			<f:event type="preRenderView" 
+			listener="#{shipperEditController.findByQueryParameterId()}" />
 		</f:metadata>
 
 		<b:jumbotron>
@@ -74,7 +75,7 @@
 						look="primary"
 						icon-awesome="save"
 						ajax="false"
-						actionListener="#{shipperEditController.updateShipper()}">
+						action="#{shipperEditController.updateShipper()}">
 					</b:commandButton>
 					
 					<b:commandButton value="Delete" 
@@ -83,7 +84,7 @@
 						onclick="return confirm('Are you sure you want to delete this item?')"
 						update="messages editForm:querySingleResultPanel"
 						immediate="true"
-						actionListener="#{shipperEditController.deleteShipper()}">
+						action="#{shipperEditController.deleteShipper()}">
 					</b:commandButton>
 					
 					<b:commandButton value="Cancel" 
