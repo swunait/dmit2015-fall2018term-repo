@@ -11,20 +11,20 @@ import javax.validation.constraints.NotNull;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import northwind.entity.Shipper;
+import northwind.entity.Region;
 import northwind.service.NorthwindService;
 
 @Named
 @ViewScoped
-public class ShipperEditController implements Serializable {
+public class RegionEditController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Inject
 	private NorthwindService currentNorthwindService;
 
 	@Produces
 	@Named
-	private Shipper existingShipper;
+	private Region existingRegion;
 	
 	@NotNull(message="Search value is required.")
 	private Integer idQueryValue;		// +getter +setter
@@ -37,10 +37,10 @@ public class ShipperEditController implements Serializable {
 		this.idQueryValue = idQueryValue;
 	}
 
-	public void findShipper() {
+	public void findRegion() {
 		try {
-			existingShipper = currentNorthwindService.findOneShipper(idQueryValue);
-			if (existingShipper != null) {
+			existingRegion = currentNorthwindService.findOneRegion(idQueryValue);
+			if (existingRegion != null) {
 				Messages.addGlobalInfo("Query successful");
 				
 			} else {
@@ -50,12 +50,12 @@ public class ShipperEditController implements Serializable {
 		} catch (Exception e) {
 			Messages.addGlobalError("Query unsucessful");
 			Messages.addGlobalError("{0}", e.getMessage());	
-		}			
+		}
 	}
 	
-	public void updateShipper() {
+	public void updateRegion() {
 		try {
-			currentNorthwindService.updateShipper(existingShipper);
+			currentNorthwindService.updateRegion(existingRegion);
 			Messages.addGlobalInfo("Update successful");
 		} catch (Exception e) {
 			Messages.addGlobalError("Update unsuccessful");	
@@ -63,29 +63,28 @@ public class ShipperEditController implements Serializable {
 		}
 	}
 
-	public void deleteShipper() {
+	public void deleteRegion() {
 		try {
-			currentNorthwindService.deleteShipper(existingShipper);
-			existingShipper = null;
+			currentNorthwindService.deleteRegion(existingRegion);
+			existingRegion = null;
 			idQueryValue = null;
 			Messages.addGlobalInfo("Delete successful");
 		} catch (Exception e) {
-			Messages.addGlobalInfo("Delete unsuccessful");
-			Messages.addGlobalError("{0}", e.getMessage());			
+			Messages.addGlobalError("Delete unsuccessful");			
+			Messages.addGlobalError("{0}", e.getMessage());	
 		}
 	}
 	
 	public void cancel() {
-		existingShipper = null;
+		existingRegion = null;
 		idQueryValue = null;
 	}
-	
+
 	public void findByQueryParameterId() {
 		if (!Faces.isPostback() && !Faces.isValidationFailed() ) {
-			if (idQueryValue != null && existingShipper == null) {
-				findShipper();		
+			if (idQueryValue != null && existingRegion == null) {
+				findRegion();		
 			}
 		}
 	}
-
 }

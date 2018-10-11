@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/template-northwind.xhtml">
+
+	<ui:param name="title" value="TERRITORIES" />
+
+	<ui:define name="maincontent">
+
+      <b:jumbotron> 
+       		<h1>Listing of TERRITORIES</h1>
+       </b:jumbotron>
+       
+        <h:form >
+            <b:messages id="messages" />
+            			
+            <b:dataTable id="territories"
+            	value="#{territories}"
+            	var="currentTerritory">
+            	
+            	<b:dataTableColumn label="TerritoryID" value="#{currentTerritory.territoryID}">
+            	</b:dataTableColumn>
+            	
+            	<b:dataTableColumn label="Territory Description" value="#{currentTerritory.territoryDescription}">
+            	</b:dataTableColumn>	
+
+            	<b:dataTableColumn label="Region" value="#{currentTerritory.region.regionDescription}">
+            	</b:dataTableColumn>	
+            	
+            	<b:dataTableColumn label="Action">
+					<b:link outcome="editTerritory"  icon-awesome="edit" icon-size="lg">
+						<f:param name="id" value="#{currentTerritory.territoryID}" />
+						edit
+					</b:link>
+				</b:dataTableColumn>
+            	
+            </b:dataTable>
+            
+        </h:form>
+
+	</ui:define>
+
+</ui:composition>

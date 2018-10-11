@@ -11,31 +11,31 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import northwind.entity.Shipper;
+import northwind.entity.Territory;
 import northwind.service.NorthwindService;
 
 @Named
 @ViewScoped
-public class ShipperViewAllController implements Serializable {
+public class TerritoryViewAllController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Inject
 	private NorthwindService currentNorthwindService;
 
-	private List<Shipper> shippers;		// +getter	
+	private List<Territory> territories;		// +getter	
 
 	@PostConstruct
-	public void retreiveAllShippers() {
-		shippers = currentNorthwindService.findAllShipper();
+	public void retreiveAllTerritorys() {
+		territories = currentNorthwindService.findAllTerritory();
 	}
 	
 	@Produces
 	@Named
-	public List<Shipper> getShippers() {
-		return shippers;
+	public List<Territory> getTerritories() {
+		return territories;
 	}
 	
-	public void onShipperListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Shipper shipper) {
-		retreiveAllShippers();
+	public void onTerritoryListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Territory shipper) {
+		retreiveAllTerritorys();
 	}
 }

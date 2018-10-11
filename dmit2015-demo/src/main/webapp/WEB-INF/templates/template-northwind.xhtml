@@ -33,6 +33,7 @@
 
     <b:navBar brand="Northwind" brandHref="#{request.contextPath}/northwind/index.xhtml" fixed="top">
     	<b:navbarLinks>
+<f:verbatim>
         	<b:dropMenu value="Regions">
             	<b:navLink value="View Regions" href="#{request.contextPath}/northwind/viewRegions.xhtml"></b:navLink>
             	<b:navLink value="New Region" href="#{request.contextPath}/northwind/regionDetail.xhtml"></b:navLink>
@@ -41,11 +42,23 @@
             	<b:navLink value="View Territories" href="#{request.contextPath}/northwind/viewTerritories.xhtml"></b:navLink>
             	<b:navLink value="New Territory" href="#{request.contextPath}/northwind/territoryDetail.xhtml"></b:navLink>
         	</b:dropMenu>
-        	<b:dropMenu value="Shippers">
-            	<b:navLink value="Create" href="#{request.contextPath}/northwind/shipper/createShipper.xhtml"></b:navLink>
-            	<b:navLink value="View" href="#{request.contextPath}/northwind/shipper/viewShippers.xhtml"></b:navLink>
-            	<b:navLink value="Edit" href="#{request.contextPath}/northwind/shipper/editShipper.xhtml"></b:navLink>
+</f:verbatim>    	
+        	<b:dropMenu value="Regions">
+            	<b:navLink value="New" href="#{request.contextPath}/northwind/region/createRegion.xhtml"></b:navLink>
+            	<b:navLink value="Edit" href="#{request.contextPath}/northwind/region/editRegion.xhtml"></b:navLink>            	
+            	<b:navLink value="View" href="#{request.contextPath}/northwind/region/viewRegions.xhtml"></b:navLink>
         	</b:dropMenu>
+        	<b:dropMenu value="Territories">
+            	<b:navLink value="New" href="#{request.contextPath}/northwind/territory/createTerritory.xhtml"></b:navLink>
+            	<b:navLink value="Edit" href="#{request.contextPath}/northwind/territory/editTerritory.xhtml"></b:navLink>
+            	<b:navLink value="View" href="#{request.contextPath}/northwind/territory/viewTerritories.xhtml"></b:navLink>
+        	</b:dropMenu>
+        	<b:dropMenu value="Shippers">
+            	<b:navLink value="New" href="#{request.contextPath}/northwind/shipper/createShipper.xhtml"></b:navLink>
+            	<b:navLink value="Edit" href="#{request.contextPath}/northwind/shipper/editShipper.xhtml"></b:navLink>
+            	<b:navLink value="View" href="#{request.contextPath}/northwind/shipper/viewShippers.xhtml"></b:navLink>
+        	</b:dropMenu>
+        	
         	<b:dropMenu value="Categories">
             	<b:navLink value="View Categories" href="#{request.contextPath}/northwind/viewCategories.xhtml"></b:navLink>
         	</b:dropMenu>

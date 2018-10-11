@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/template-northwind.xhtml">
+
+	<ui:param name="title" value="Region - Edit" />
+
+	<ui:define name="maincontent">
+		<f:metadata>
+			<f:viewParam name="id" value="#{regionEditController.idQueryValue}" />
+			<f:event type="preRenderView" listener="#{regionEditController.findByQueryParameterId()}" />
+		</f:metadata>
+		
+		<b:jumbotron>
+			<h1>Existing REGION Details</h1>
+		</b:jumbotron>
+
+		<b:messages id="messages" />
+
+		<b:form id="editForm">		
+		
+			<b:inputText id="queryValue" 
+				label="Search Region ID" 
+				value="#{regionEditController.idQueryValue}"
+				placeholder="enter a regionID to search for">
+				<b:focus />
+			</b:inputText>
+			
+			<b:commandButton value="Search" 
+				icon-awesome="search"
+				look="info"
+				ajax="true" update="messages editForm:querySingleResultPanel"
+				actionListener="#{regionEditController.findRegion()}">
+			</b:commandButton>
+			
+			<p:outputPanel id="querySingleResultPanel">
+			
+				<b:panel title="Region Details" 
+					rendered="#{existingRegion != null ? 'true' : 'false'}"> 
+					
+					<b:inputText id="regionId" 
+						label="RegionID" 
+						readonly="true"
+						value="#{existingRegion.regionID}">
+					</b:inputText>
+				
+					<b:inputText id="regionDescription" 
+						label="Region Deascription"
+						value="#{existingRegion.regionDescription}"
+						placeholder="enter region description">
+					</b:inputText>
+								
+					<b:commandButton value="Update" 
+						look="primary"
+						icon-awesome="save"
+						update="messages editForm:querySingleResultPanel"
+						actionListener="#{regionEditController.updateRegion()}">
+					</b:commandButton>
+					
+					<b:commandButton value="Delete" 
+						look="danger"
+						icon-awesome="trash"
+						onclick="return confirm('Are you sure you want to delete this item?')"
+						update="messages editForm:querySingleResultPanel"
+						immediate="true"
+						actionListener="#{regionEditController.deleteRegion()}">
+					</b:commandButton>
+					
+					<b:commandButton value="Cancel" 
+						look="default"
+						icon-awesome="cancel"
+						ajax="false"
+						update="messages editForm:querySingleResultPanel"
+						immediate="true"
+						actionListener="#{regionEditController.cancel()}">
+					</b:commandButton>
+					
+				</b:panel>
+			</p:outputPanel>	
+					
+		</b:form>
+
+	</ui:define>
+
+</ui:composition>
