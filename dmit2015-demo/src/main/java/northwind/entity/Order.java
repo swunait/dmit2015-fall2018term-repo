@@ -2,6 +2,9 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import northwind.service.ValidOrderRequiredDate;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.List;
  * The persistent class for the Orders database table.
  * 
  */
+@ValidOrderRequiredDate(message="Required Date must be 3 days after the order date.")
 @Entity
 @Table(name="Orders")
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
