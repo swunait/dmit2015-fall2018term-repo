@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidCanadaPhone {
 
-	String message() default "northwind.entity.Job.phone";
+	String message() default "{northwind.entity.Job.phone}";
 	
 	Class<?>[] groups() default { };
 

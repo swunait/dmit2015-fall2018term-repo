@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
@@ -30,6 +31,7 @@ public class TerritoryEditController implements Serializable {
 	@NotBlank(message="Search value is required.")
 	private String idQueryValue;		// +getter +setter
 	
+	@NotNull(message="A Region must be selected")
 	private Integer selectedRegionId;	// +getter +setter
 	
 	public Integer getSelectedRegionId() {

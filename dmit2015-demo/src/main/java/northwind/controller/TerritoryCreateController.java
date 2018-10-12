@@ -7,6 +7,7 @@ import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
@@ -26,6 +27,7 @@ public class TerritoryCreateController implements Serializable {
 	@Named
 	private Territory newTerritory;
 	
+	@NotNull(message="A Region must be selected")
 	private Integer selectedRegionId;	// +getter +setter
 	
 	public Integer getSelectedRegionId() {

@@ -22,7 +22,7 @@
 
 	<b:messages id="messages" />
 
-		<b:form>		
+		<b:form id="createForm">		
 			<b:inputText id="companyName" 
 				label="Company Name"
 				value="#{newShipper.companyName}"
@@ -34,12 +34,17 @@
 				value="#{newShipper.phone}"
 				placeholder="enter phone number">
 			</b:inputText>
-			
+
+<f:verbatim>
 			<f:validateWholeBean value="#{newShipper}" />
+</f:verbatim>			
+			
+			<o:validateBean value="#{newShipper}" />
 			
 			<b:commandButton value="Add" 
 				icon-awesome="save"
 				look="primary"
+				ajax="true" update="messages createForm:companyName createForm:phone"
 				actionListener="#{shipperCreateController.createNewShipper()}">
 			</b:commandButton>
 				

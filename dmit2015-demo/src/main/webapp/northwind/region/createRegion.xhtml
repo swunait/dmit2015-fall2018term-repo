@@ -20,20 +20,23 @@
 
 		<b:messages id="messages" />
 
-		<b:form>
-			<b:inputText id="regionDescription" 
-				label="Region Description"
-				value="#{newRegion.regionDescription}"
-				placeholder="enter region description">
-				<b:focus />
-			</b:inputText>
+		<b:form id="createForm">
+			<!-- p:outputPanel used as a workaround issue where the inputText field would disappear after input validation error occurs -->
+			<p:outputPanel id="panel">
+				<b:inputText id="regionDescription" 
+					label="Region Description"
+					value="#{newRegion.regionDescription}"
+					placeholder="enter region description">
+					<b:focus />
+				</b:inputText>			
+			</p:outputPanel>
 			
 			<b:commandButton value="Add" 
 				icon-awesome="save"
 				look="primary"
+				ajax="true" update="messages createForm:panel"
 				actionListener="#{regionCreateController.createNewRegion()}">
 			</b:commandButton>
-
 		</b:form>
 
 	</ui:define>

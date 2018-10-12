@@ -22,7 +22,7 @@
 
 	<b:messages id="messages" />
 
-	<b:form>		
+	<b:form id="createForm">		
 		<b:inputText id="territoryId" 
 			label="TerritoryID" 
 			value="#{newTerritory.territoryID}"
@@ -47,6 +47,7 @@
 		<b:commandButton value="Add" 
 			icon-awesome="save"
 			look="primary"
+			ajax="true" update="messages createForm:territoryId createForm:territoryDescription createForm:regionId"
 			actionListener="#{territoryCreateController.createNewTerritory()}">
 		</b:commandButton>
 			

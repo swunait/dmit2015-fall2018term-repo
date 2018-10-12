@@ -12,7 +12,7 @@ public class CanadaPhoneValidator implements ConstraintValidator<ValidCanadaPhon
 		if (currentShipper == null) {
 			return true;
 		}
-		return currentShipper.getPhone().matches("^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}");
+		return currentShipper.getPhone().matches("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$");
 	}
 
 }
