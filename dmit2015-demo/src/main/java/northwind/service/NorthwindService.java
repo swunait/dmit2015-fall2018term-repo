@@ -5,12 +5,16 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import northwind.entity.Category;
+import northwind.entity.Customer;
+import northwind.entity.Order;
 import northwind.entity.Region;
 import northwind.entity.Shipper;
 import northwind.entity.Territory;
+import northwind.report.CategorySales;
 
 @Stateless	// Mark this class as stateless EJB.
 public class NorthwindService {
@@ -120,6 +124,64 @@ public class NorthwindService {
 	}
 	
 	
+	public Order findOneOrderWithDetailsByOrderId(int orderId) {
+		Order querySingleResult = null;
+		try {
+			querySingleResult = entityManager.createQuery(
+				"SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :orderIdValue", 
+				Order.class)
+				.setParameter("orderIdValue", orderId)
+				.getSingleResult();
+		} catch(NoResultException e) {
+			querySingleResult = null;
+		}
+		return querySingleResult;
+	}
+	
+	public List<Customer> findAllCustomer() {
+		return entityManager.createQuery("SELECT c FROM Customer c ORDER BY c.companyName", Customer.class).getResultList();
+	}
+	
+	public List<Order> findAllOrderByCustomerId(String customerId) {
+		return entityManager.createQuery(
+			"SELECT o FROM Order o WHERE o.customer.customerID = :customerIdValue", 
+			Order.class)
+			.setParameter("customerIdValue", customerId)
+			.getResultList();
+	}
 	
 	
+	public List<Integer> findYearsWithOrders() {
+		return entityManager.createQuery(
+			"SELECT YEAR(o.shippedDate) "
+			+ "FROM Order o "
+			+ "WHERE YEAR(o.shippedDate) IS NOT NULL "
+			+ "GROUP BY YEAR(o.shippedDate) "
+			+ "ORDER BY YEAR(o.shippedDate) "
+			, Integer.class)
+			.getResultList();
+	}
+	
+	public List<CategorySales> findCategorySales() {
+		return entityManager.createQuery(
+			"SELECT new northwind.report.CategorySales(c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) ) "
+			+ " FROM OrderDetail od, IN (od.product) p, IN (p.category) c, IN (od.order) o "
+			+ " GROUP BY c.categoryID",
+			CategorySales.class)
+			.getResultList();
+	}
+	
+	public List<CategorySales> findCategorySalesForYear(Integer year) {
+		if (year == null) {
+			return findCategorySales();
+		}
+		return entityManager.createQuery(
+			"SELECT new northwind.report.CategorySales(c.categoryName, SUM(od.unitPrice * od.quantity * (1 - od.discount)) ) "
+			+ " FROM OrderDetail od, IN (od.product) p, IN (p.category) c, IN (od.order) o "
+			+ " WHERE YEAR(o.shippedDate) = :yearValue "
+			+ " GROUP BY c.categoryID",
+			CategorySales.class)
+			.setParameter("yearValue", year)
+			.getResultList();
+	}
 }
