@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+>
+	<p:outputPanel id="queryResultListPanel">
+			
+				<b:panel title="Customer Orders" rendered="#{(orderQueryController.queryResultList != null) and (orderQueryController.querySingleResult == null) }">
+					<b:dataTable id="ordersByCustomerTable"
+						value="#{orderQueryController.queryResultList}"
+						var="order"
+						searching="false"
+						paginated="false">
+						<b:dataTableColumn value="#{order.orderID}" />
+						
+						<b:dataTableColumn >
+							<f:facet name="header">
+								Order Date
+							</f:facet>
+							<h:outputText value="#{order.orderDate}">
+								<f:convertDateTime pattern="MMMM d,yyyy"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn >
+							<f:facet name="header">
+								Shipped Date
+							</f:facet>
+							<h:outputText value="#{order.shippedDate}">
+								<f:convertDateTime pattern="MMMM d,yyyy"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn styleClass="text-right">
+							<f:facet name="header">
+								Employee
+							</f:facet>
+							<h:outputText value="#{order.employee.firstName} #{order.employee.lastName}">
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn>
+							<f:facet name="header">
+								Action
+							</f:facet>
+							<b:commandButton value="view details" 
+								look="link"
+								actionListener="#{orderQueryController.findOrderByOrderId(order.orderID)}"
+								ajax="true" update="queryForm:querySingleResultPanel queryForm:queryResultListPanel">
+							</b:commandButton>
+						</b:dataTableColumn>
+					</b:dataTable>
+				</b:panel>
+			</p:outputPanel>
+			
+	<ui:include src="/northwind/query/orderSingleResultComposition.xhtml" />
+
+</ui:composition>

@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/template-northwind.xhtml">
+
+	<ui:param name="title" value="Northwind - View Sales Order By Customer" />
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>View Sales Order By Customer</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages" />
+		
+		<b:form id="queryForm">
+			<b:row>
+				<b:column span="10">
+					<b:selectOneMenu id="customerId" value="#{orderQueryController.selectedCustomerId}">
+						<f:selectItem itemLabel="Choose Customer" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{orderQueryController.retrieveAllCustomers()}" 
+							var="customer"
+							itemLabel="#{customer.companyName}"
+							itemValue="#{customer.customerID}" />
+					</b:selectOneMenu>
+				</b:column>
+				<b:column span="2">
+					<b:commandButton value="Search"
+						look="primary"
+						ajax="true"
+						update="queryForm:queryResultListPanel queryForm:querySingleResultPanel :messages"
+						actionListener="#{orderQueryController.findOrdersByCustomer}">
+					</b:commandButton>
+					<b:commandButton value="Cancel"
+						look="default"
+						immediate="true"
+						ajax="true"
+						update="queryForm:queryResultListPanel queryForm:querySingleResultPanel messages"
+						actionListener="#{orderQueryController.cancel()}">
+					</b:commandButton>	
+				</b:column>
+			</b:row>
+			
+			<ui:include src="/northwind/query/orderResultListComposition.xhtml" />
+		
+		</b:form>
+
+</ui:define>
+
+</ui:composition>
