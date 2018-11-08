@@ -18,28 +18,28 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 		errorPage="/security/customLogin.xhtml?error")
 )
 
-//@LdapIdentityStoreDefinition(
-//	url = "ldap://192.168.202.227:389/",
-//	callerSearchBase = "ou=Departments,dc=dmit2015,dc=ca",
-//	callerNameAttribute = "SamAccountName",	
-//	groupSearchBase = "ou=Departments,dc=dmit2015,dc=ca",
-//	groupMemberAttribute="member",
-//	bindDn = "CN=DMIT2015 Student,ou=IT Support,ou=Departments,dc=dmit2015,dc=ca",
-//	bindDnPassword = "Password2015",
-//	priority = 5
-//)
-
-@DatabaseIdentityStoreDefinition(
-	dataSourceLookup="java:jboss/datasources/MysqlNorthwindDS",
-	callerQuery="SELECT password FROM LoginUser WHERE username = ?",
-	groupsQuery="SELECT g.groupname FROM LoginUser u, LoginUserGroup ug, LoginGroup g WHERE u.username = ? AND u.id = ug.userid AND ug.groupid = g.id",
-	hashAlgorithm = Pbkdf2PasswordHash.class,
-	hashAlgorithmParameters = { 
-		"Pbkdf2PasswordHash.Iterations=3072", 
-		"Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512", 
-		"Pbkdf2PasswordHash.SaltSizeBytes=64" },
-	priority = 10
+@LdapIdentityStoreDefinition(
+	url = "ldap://metro-ds1.nait.ca:389",
+	callerSearchBase = "dc=nait,dc=ca",
+	callerNameAttribute = "SamAccountName",	
+	groupSearchBase = "dc=nait,dc=ca",
+	groupMemberAttribute="member",
+	bindDn = "cn=DMIT Student1,ou=DMITStudentRestricted,ou=Student,ou=DMIT,ou=SICET,dc=nait,dc=ca",
+	bindDnPassword = "Password2015",
+	priority = 5
 )
+
+//@DatabaseIdentityStoreDefinition(
+//	dataSourceLookup="java:jboss/datasources/MysqlNorthwindDS",
+//	callerQuery="SELECT password FROM LoginUser WHERE username = ?",
+//	groupsQuery="SELECT g.groupname FROM LoginUser u, LoginUserGroup ug, LoginGroup g WHERE u.username = ? AND u.id = ug.userid AND ug.groupid = g.id",
+//	hashAlgorithm = Pbkdf2PasswordHash.class,
+//	hashAlgorithmParameters = { 
+//		"Pbkdf2PasswordHash.Iterations=3072", 
+//		"Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512", 
+//		"Pbkdf2PasswordHash.SaltSizeBytes=64" },
+//	priority = 10
+//)
 @ApplicationScoped
 public class ApplicationConfig {
 
