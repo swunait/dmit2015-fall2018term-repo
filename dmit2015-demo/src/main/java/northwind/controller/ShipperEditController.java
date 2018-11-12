@@ -67,6 +67,8 @@ public class ShipperEditController implements Serializable {
 			currentNorthwindService.updateShipper(existingShipper);
 			Messages.addGlobalInfo("Update successful");
 			nextPage = "viewShippers?faces-redirect=true";
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());	
 		} catch (Exception e) {
 			Messages.addGlobalError("Update unsuccessful");	
 			logger.log(Level.SEVERE, e.toString(), e);	
@@ -82,6 +84,8 @@ public class ShipperEditController implements Serializable {
 			idQueryValue = null;
 			Messages.addGlobalInfo("Delete successful");
 			nextPage = "viewShippers?faces-redirect=true";
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());	
 		} catch (Exception e) {
 			Messages.addGlobalInfo("Delete unsuccessful");
 			logger.log(Level.SEVERE, e.toString(), e);			
