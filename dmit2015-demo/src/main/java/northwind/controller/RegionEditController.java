@@ -1,7 +1,10 @@
 package northwind.controller;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.ejb.EJBAccessException;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -18,6 +21,9 @@ import northwind.service.NorthwindService;
 @ViewScoped
 public class RegionEditController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Logger logger;
 	
 	@Inject
 	private NorthwindService currentNorthwindService;
@@ -47,9 +53,11 @@ public class RegionEditController implements Serializable {
 				Messages.addGlobalError("Query unsuccessful");
 				
 			}
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());	
 		} catch (Exception e) {
 			Messages.addGlobalError("Query unsucessful");
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);		
 		}
 	}
 	
@@ -57,9 +65,11 @@ public class RegionEditController implements Serializable {
 		try {
 			currentNorthwindService.updateRegion(existingRegion);
 			Messages.addGlobalInfo("Update successful");
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());
 		} catch (Exception e) {
 			Messages.addGlobalError("Update unsuccessful");	
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);	
 		}
 	}
 
@@ -69,9 +79,11 @@ public class RegionEditController implements Serializable {
 			existingRegion = null;
 			idQueryValue = null;
 			Messages.addGlobalInfo("Delete successful");
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());
 		} catch (Exception e) {
 			Messages.addGlobalError("Delete unsuccessful");			
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);	
 		}
 	}
 	

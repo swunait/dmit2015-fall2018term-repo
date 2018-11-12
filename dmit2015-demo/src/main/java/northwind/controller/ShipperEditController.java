@@ -1,7 +1,10 @@
 package northwind.controller;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.ejb.EJBAccessException;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -19,6 +22,9 @@ import northwind.service.NorthwindService;
 public class ShipperEditController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private Logger logger;
+	
 	@Inject
 	private NorthwindService currentNorthwindService;
 
@@ -47,9 +53,11 @@ public class ShipperEditController implements Serializable {
 				Messages.addGlobalError("Query unsuccessful");
 				
 			}
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());
 		} catch (Exception e) {
 			Messages.addGlobalError("Query unsucessful");
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);	
 		}			
 	}
 	
@@ -61,7 +69,7 @@ public class ShipperEditController implements Serializable {
 			nextPage = "viewShippers?faces-redirect=true";
 		} catch (Exception e) {
 			Messages.addGlobalError("Update unsuccessful");	
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);	
 		}
 		return nextPage;
 	}
@@ -76,7 +84,7 @@ public class ShipperEditController implements Serializable {
 			nextPage = "viewShippers?faces-redirect=true";
 		} catch (Exception e) {
 			Messages.addGlobalInfo("Delete unsuccessful");
-			Messages.addGlobalError("{0}", e.getMessage());			
+			logger.log(Level.SEVERE, e.toString(), e);			
 		}
 		return nextPage;
 	}
