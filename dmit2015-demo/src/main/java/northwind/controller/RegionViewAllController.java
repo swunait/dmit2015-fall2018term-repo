@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -34,9 +32,5 @@ public class RegionViewAllController implements Serializable {
 	public List<Region> getRegions() {
 		return regions;
 	}
-	
-	public void onRegionListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Region shipper) {
-		retreiveAllRegions();
-	}
-	
+		
 }

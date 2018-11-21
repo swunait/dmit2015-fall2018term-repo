@@ -2,6 +2,11 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.math.BigDecimal;
 
 
@@ -9,6 +14,8 @@ import java.math.BigDecimal;
  * The persistent class for the `Order Details` database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="`Order Details`")
 @NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
@@ -28,11 +35,13 @@ public class OrderDetail implements Serializable {
 	private BigDecimal unitPrice;
 
 	//bi-directional many-to-one association to Order
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="OrderID", insertable=false, updatable=false)
 	private Order order;
 
 	//bi-directional many-to-one association to Product
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="ProductID", insertable=false, updatable=false)
 	private Product product;

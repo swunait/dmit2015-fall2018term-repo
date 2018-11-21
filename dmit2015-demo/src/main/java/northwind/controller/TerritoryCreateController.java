@@ -1,8 +1,11 @@
 package northwind.controller;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBAccessException;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -19,6 +22,9 @@ import northwind.service.NorthwindService;
 @ViewScoped
 public class TerritoryCreateController implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Logger logger;
 	
 	@Inject
 	private NorthwindService currentNorthwindService;
@@ -53,9 +59,11 @@ public class TerritoryCreateController implements Serializable {
 			currentNorthwindService.addTerritory(newTerritory);
 			initNewTerritory();
 			Messages.addGlobalInfo("Add successful");
+		} catch(EJBAccessException e) {
+			Messages.addGlobalError(e.getMessage());	
 		} catch (Exception e) {
 			Messages.addGlobalError("Add unsuccessful");
-			Messages.addGlobalError("{0}", e.getMessage());	
+			logger.log(Level.SEVERE, e.toString(), e);	
 		}
 	}
 	

@@ -2,6 +2,11 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.List;
 
 
@@ -9,6 +14,8 @@ import java.util.List;
  * The persistent class for the Suppliers database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Suppliers")
 @NamedQuery(name="Supplier.findAll", query="SELECT s FROM Supplier s")
@@ -55,6 +62,7 @@ public class Supplier implements Serializable {
 	private String region;
 
 	//bi-directional many-to-one association to Product
+	@XmlTransient
 	@OneToMany(mappedBy="supplier")
 	private List<Product> products;
 

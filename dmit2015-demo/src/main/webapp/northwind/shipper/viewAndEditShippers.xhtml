@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:hf="http://highfaces.org"
+	template="/WEB-INF/templates/template-northwind.xhtml">
+
+	<ui:param name="title" value="Shippers" />
+
+	<ui:define name="maincontent">
+
+		<b:jumbotron>
+			<h1>All Shippers</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages"></b:messages>
+		
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true"/>
+<f:verbatim>
+</f:verbatim>		
+			<p:dataTable value="#{shippers}"
+				var="currentShipper"
+				editable="true" >
+				<f:facet name="header">
+		           Editable DataTable
+		      	</f:facet>
+		       
+		    	<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" 
+		    		update=":form:msgs" />
+       			<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" 
+       				update=":form:msgs" />
+		       
+		        <p:column headerText="ShipperID">
+					<h:outputText value="#{currentShipper.shipperID}" />
+		       	</p:column>
+		       	
+		       	<p:column headerText="Company Name">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{currentShipper.companyName}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{currentShipper.companyName}" style="width:100%" label="Year"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		       <p:column headerText="Phone">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{currentShipper.phone}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{currentShipper.phone}" style="width:100%" label="Year"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+				       			
+				<p:column style="width:32px">
+	           		<p:rowEditor />
+	       		</p:column>
+       	       				
+			</p:dataTable>
+							
+			
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -2,6 +2,11 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,6 +15,8 @@ import java.util.List;
  * The persistent class for the Products database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Products")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
@@ -43,6 +50,7 @@ public class Product implements Serializable {
 	private short unitsOnOrder;
 
 	//bi-directional many-to-one association to OrderDetail
+	@XmlTransient
 	@OneToMany(mappedBy="product")
 	private List<OrderDetail> orderDetails;
 
