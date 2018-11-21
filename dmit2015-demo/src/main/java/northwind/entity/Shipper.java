@@ -4,6 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import northwind.service.ValidCanadaPhone;
 
@@ -14,6 +18,8 @@ import java.util.List;
  * The persistent class for the Shippers database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @ValidCanadaPhone
 @Entity
 @Table(name="Shippers")
@@ -36,6 +42,7 @@ public class Shipper implements Serializable {
 	private String phone;
 
 	//bi-directional many-to-one association to Order
+	@XmlTransient
 	@OneToMany(mappedBy="shipper")
 	private List<Order> orders;
 

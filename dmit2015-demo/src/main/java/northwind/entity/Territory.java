@@ -6,6 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import java.util.List;
 
@@ -14,6 +18,8 @@ import java.util.List;
  * The persistent class for the Territories database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Territories")
 @NamedQuery(name="Territory.findAll", query="SELECT t FROM Territory t")
@@ -32,6 +38,7 @@ public class Territory implements Serializable {
 	private String territoryDescription;
 
 	//bi-directional many-to-many association to Employee
+	@XmlTransient
 	@ManyToMany
 	@JoinTable(
 		name="EmployeeTerritories"
@@ -44,9 +51,10 @@ public class Territory implements Serializable {
 		)
 	private List<Employee> employees;
 
+	//bi-directional many-to-one association to Region
+	@XmlTransient
 	@Valid
 	@NotNull(message="A region is required.")
-	//bi-directional many-to-one association to Region
 	@ManyToOne
 	@JoinColumn(name="RegionID")
 	private Region region;

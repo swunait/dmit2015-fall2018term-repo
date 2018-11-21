@@ -2,6 +2,11 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +15,8 @@ import java.util.List;
  * The persistent class for the Employees database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Employees")
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
@@ -77,6 +84,7 @@ public class Employee implements Serializable {
 	private String titleOfCourtesy;
 
 	//bi-directional many-to-many association to Territory
+	@XmlTransient
 	@ManyToMany(mappedBy="employees")
 	private List<Territory> territories;
 
@@ -86,10 +94,12 @@ public class Employee implements Serializable {
 	private Employee employee;
 
 	//bi-directional many-to-one association to Employee
+	@XmlTransient
 	@OneToMany(mappedBy="employee")
 	private List<Employee> employees;
 
 	//bi-directional many-to-one association to Order
+	@XmlTransient
 	@OneToMany(mappedBy="employee")
 	private List<Order> orders;
 

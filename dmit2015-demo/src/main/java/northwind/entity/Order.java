@@ -2,6 +2,10 @@ package northwind.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import northwind.service.ValidOrderRequiredDate;
 
@@ -14,6 +18,8 @@ import java.util.List;
  * The persistent class for the Orders database table.
  * 
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @ValidOrderRequiredDate(message="Required Date must be 3 days after the order date.")
 @Entity
 @Table(name="Orders")
@@ -60,6 +66,7 @@ public class Order implements Serializable {
 	private String shipRegion;
 
 	//bi-directional many-to-one association to OrderDetail
+	@XmlTransient
 	@OneToMany(mappedBy="order")
 	private List<OrderDetail> orderDetails;
 
