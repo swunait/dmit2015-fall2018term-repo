@@ -1,11 +1,13 @@
 package dmit2015.model;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 
 @WebService
 (serviceName="ShapeEndPoint",
-			targetNamespace="http://localhost",
+			targetNamespace="http://localhost/",
 			portName="ShapePort")
 public class ShapeXmlWebService {
 	
@@ -15,12 +17,14 @@ public class ShapeXmlWebService {
 		return currentCircle.getArea();
 	}
 	
-	public double diameterOfCiricle(double radius) {
+	@WebResult(name="diameter")
+	public double diameterOfCiricle(@WebParam(name="radius") double radius) {
 		Circle currentCircle = new Circle(radius);
 		return currentCircle.getDiameter();
 	}
 	
-	public double circumferenceOfCircle(double radius) {
+	@WebResult(name="circumference")
+	public double  circumferenceOfCircle(@WebParam(name="radius") double radius) {
 		Circle currentCircle = new Circle(radius);
 		return currentCircle.getCircumference();
 
