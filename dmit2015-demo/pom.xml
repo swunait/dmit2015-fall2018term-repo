@@ -164,6 +164,18 @@
 			<artifactId>jasypt</artifactId>
 			<version>1.9.2</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.2.7</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -171,6 +183,29 @@
 			given to the generated war, and hence the context root) -->
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+			<!-- <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+						<configuration>
+							<vmArgs>
+								<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+							</vmArgs>
+							<wsdlUrls>
+								<wsdlUrl>http://localhost:8080/dmit2015-fall2018term-demo/TemperatureConverter?wsdl</wsdlUrl>
+							</wsdlUrls>
+							<keep>true</keep>
+							<packageName>dmit2015.soap</packageName>
+							<sourceDestDir>src/main/java</sourceDestDir>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${version.war.plugin}</version>
