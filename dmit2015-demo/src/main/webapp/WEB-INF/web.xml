@@ -84,7 +84,7 @@
 		<role-name>Employee</role-name>
 	</security-role>
 	
- 	<security-constraint>
+ 	<!-- <security-constraint>
 		<web-resource-collection>
 			<web-resource-name>queryResources</web-resource-name>
 			<url-pattern>/northwind/query/*</url-pattern>
@@ -119,7 +119,7 @@
 		<auth-constraint>
 			<role-name>**</role-name>
 		</auth-constraint>
-	</security-constraint>
+	</security-constraint> -->
 
 
 <!-- 	<security-constraint> -->

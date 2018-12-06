@@ -37,7 +37,7 @@ public class RESTShipperViewAllController implements Serializable {
 	
 	@Produces
 	@Named
-	public List<Shipper> getShippers() {
+	public List<Shipper> getRESTShippers() {
 		return shippers;
 	}
 	
