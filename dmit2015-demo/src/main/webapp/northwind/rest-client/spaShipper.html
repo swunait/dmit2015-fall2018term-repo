@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  http://localhost:8080/dmit2015-fall2018term-demo/rest/northwind-api/shippers -->
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+		crossorigin="anonymous">	
+ 	
+<title>SPA - Single Page Application</title>
+</head>
+<body>
+<div class="container">
+	<h2>Northwind SPA for Shippers</h2>
+
+	<div id="summary" class="card" data-bind="if: displaySummary">
+    	<div class="card-header">
+    		Shippers Summary
+    	</div>
+      	<div class="card-body">      	
+			<table id="shippersTable" class="table table-striped table-dark">
+				<thead>
+					<tr>
+						<th>ShipperID</th>
+						<th>Company Name</th>
+						<th>Phone</th>	
+						<th>Actions</th>
+					</tr>	
+				</thead>
+				<tbody data-bind="foreach: shippers">
+					<tr>
+						<td data-bind="text: shipperID"></td>
+						<td data-bind="text: companyName"></td>
+						<td data-bind="text: phone"></td>
+						<td>
+							<a href="#" data-bind="click: $parent.editShipper">Edit</a> 
+							&nbsp;&nbsp;&nbsp;
+							<a href="#" data-bind="click: $parent.deleteShipper">Delete</a> 
+						</td>				
+					</tr>	
+					
+				</tbody>
+			</table>	
+			<button class="btn btn-primary" data-bind="click: newShippeForm">New Shipper</button>
+		</div>
+	</div>
+
+	<div id="editor" class="card" data-bind="if: editMode() || createMode()" >
+        <div class="card-header">
+            Shipper Form
+        </div>
+
+        <div class="card-body" data-bind="with: selectedShipper">
+        	<div class="form-group" data-bind="visible: $root.editMode()" >
+                <label>ShipperID</label>
+                <span class="form-control" data-bind="text: shipperID"></span>
+            </div>
+            <div class="form-group">
+                <label>Company Name</label>
+                <input class="form-control" data-bind="value: companyName" />
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+               <input class="form-control" data-bind="value: phone" />
+            </div>
+            <span data-bind="if: $root.createMode">
+	            <button class="btn btn-primary" data-bind="click: $root.addShipper">Add</button>
+            </span>
+            <span data-bind="if: $root.editMode">
+	            <button class="btn btn-info" data-bind="click: $root.updateShipper">Update</button>
+            </span>
+            <span data-bind="if: $root.editMode">
+	            <button class="btn btn-danger" data-bind="click: $root.deleteSelectedShipper">Delete</button>            
+            </span>
+            <button class="btn btn-default" data-bind="click: $root.cancelEdit">Cancel</button>
+      </div>
+    </div>
+    
+</div>
+
+	<script 
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script 
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+		crossorigin="anonymous"></script>	
+	<script 
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+		crossorigin="anonymous"></script>
+	
+	<script  
+		src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+	
+<script type="text/javascript">
+function Shipper(data) {
+	var self = this;
+	self.shipperID = ko.observable(data.shipperID);
+	self.companyName = ko.observable(data.companyName);
+	self.phone = ko.observable(data.phone);
+}
+
+function AppViewModel() {
+	var self = this;
+	self.shippers = ko.observableArray([]);
+	self.selectedShipper = ko.observable();
+	self.editMode = ko.observable(false);
+	self.displaySummary = ko.observable(true);
+	self.createMode = ko.observable(false);
+	
+	var baseURI = "http://localhost:8080/dmit2015-demo/rest/northwind-api/shippers";
+	
+	$.getJSON(baseURI, function(allData) {
+		/*
+		var mappedShippers = $.map(allData, function(singleData) { 
+			return new Shipper(singleData); 
+		});
+		self.shippers(mappedShippers);
+		*/
+		
+		allData.forEach(function (singleData) {
+			self.shippers.push(new Shipper(singleData));
+		});
+	});
+	
+
+	self.editShipper = function(selectedItem) {
+		self.editMode(true);
+		self.selectedShipper(selectedItem);
+		self.displaySummary(false);
+		self.createMode(false);
+	}
+	
+	self.cancelEdit = function() {
+		self.editMode(false);
+		self.selectedShipper(null);
+		self.displaySummary(true);
+		self.createMode(false);
+	}
+	
+	
+	self.newShippeForm = function () {
+		self.displaySummary(false);
+		self.editMode(false);
+		self.selectedShipper(new Shipper({}));
+		self.createMode(true);
+	}
+
+	self.deleteSelectedShipper = function() {
+		var result = confirm("Are you sure you want to delete this record?")
+		if (result == true ) {
+			var northwindAPI = baseURI + "/" + self.selectedShipper().shipperID();
+			$.ajax(northwindAPI, {
+				type: "DELETE",
+				contentType: "application/json",
+				success: function(result) { 
+					viewModel.cancelEdit();
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR);
+					console.log(textStatus);
+					console.log(errorThrown);
+					alert('Delete was not successful. ' + errorThrown);
+				}
+			});			
+		}
+	}
+
+
+	self.deleteShipper = function(item) {
+		var result = confirm("Are you sure you want to delete this record?")
+		if (result == true ) {
+			var northwindAPI = baseURI + "/" + item.shipperID();
+			$.ajax(northwindAPI, {
+				type: "DELETE",
+				contentType: "application/json",
+				success: function(result) { 
+					self.shippers.remove(item);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR);
+					console.log(textStatus);
+					console.log(errorThrown);
+					alert('Delete was not successful. ' + errorThrown);
+				}
+			});			
+		}
+	}
+	
+	self.updateShipper = function(item) {
+		var self = this;
+		
+		var northwindAPI = baseURI;
+		
+		$.ajax(northwindAPI, {
+			data: ko.toJSON( {shipperID: item.shipperID(), companyName: item.companyName(), phone: item.phone()} ),
+			type: "PUT",
+			contentType: "application/json",
+			success: function(result) { 
+				viewModel.cancelEdit();
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
+				alert('Update was not successful. ' + errorThrown);
+			}
+		});
+		
+	}
+
+	self.addShipper = function(item) {
+		var northwindAPI = baseURI;		
+		$.ajax(northwindAPI, {
+			data: ko.toJSON( {companyName: item.companyName(), phone: item.phone()} ),
+			type: "POST",
+			contentType: "application/json",
+			success: function(result) { 
+				self.editMode(false);
+				self.selectedShipper(null);
+				self.createMode(false);
+				self.displaySummary(true);
+				$.getJSON(northwindAPI, function(allData) {
+					/*
+					allData.forEach(function (singleData) {
+						self.shippers.push(new Shipper(singleData));
+					});
+					*/
+					var mappedShippers = $.map(allData, function(singleData) { 
+						return new Shipper(singleData); 
+					});
+					self.shippers(mappedShippers);
+				});
+				
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("jqXHR: " + jqXHR);
+				console.log("textStatus: " + textStatus);
+				console.log("errorThrown: " + errorThrown);
+				alert(errorThrown + "\n" + $.parseJSON(jqXHR.responseText).error);
+			}
+		});
+	}
+	
+}
+
+var viewModel = new AppViewModel();
+ko.applyBindings(viewModel);
+
+</script>	
+		
+</body>
+</html>
